@@ -1,12 +1,6 @@
-import { getUser } from "@/app/actions/user";
-import NavLinks from "./NavLinks";
-import { sleep } from "@/lib/sleep";
 import Link from "next/link";
 
-export default async function Navbar() {
-	await sleep(1500);
-	const user = await getUser();
-
+export default function NavbarLoading() {
 	return (
 		<header className="flex-shrink p-2 min-h-10 bg-black/75 text-white">
 			<div className="container flex flex-wrap gap-2 justify-between items-center">
@@ -15,7 +9,7 @@ export default async function Navbar() {
 						Donis3/Next-SST
 					</h1>
 				</Link>
-				<NavLinks user={user} />
+				<div>Loading...</div>
 			</div>
 		</header>
 	);

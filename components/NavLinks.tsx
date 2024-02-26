@@ -4,14 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
-const links = [
-	{ href: "/", text: "Home" },
-	{ href: "/about", text: "About" },
-	{ href: "/login", text: "Login" },
-];
-
-export default function NavLinks() {
+export default function NavLinks({ user }: { user: string | undefined }) {
 	const path = usePathname();
+	const links = [
+		{ href: "/", text: "Home" },
+		{ href: "/about", text: "About" },
+	];
+
+	if (user) {
+		links.push({ href: "/user", text: user });
+	} else {
+		links.push({ href: "/login", text: "Login" });
+	}
 	return (
 		<nav className="flex justify-end gap-1 flex-shrink ">
 			{links.map((link, i) => (
@@ -37,7 +41,7 @@ function NavLink({
 	return (
 		<Link
 			href={href}
-			className="bg-white/5 p-1 rounded-md font-semibold text-base"
+			className="bg-white/5 p-1 rounded-md font-semibold text-sm text-white/75"
 			prefetch={false}
 			style={{
 				backgroundColor: isActive
